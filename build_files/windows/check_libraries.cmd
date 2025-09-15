@@ -13,7 +13,8 @@ if NOT EXIST "%BUILD_VS_LIBDIR%\.git" (
 		echo.
 		echo The required external libraries in %BUILD_VS_LIBDIR% are missing
 		echo.
-		set /p GetLibs= "Would you like to download them? (y/n)"
+		echo "Would you like to download them? (y/n)"
+		echo "Y"
 		set /p Hello="Y"
 		if /I "!Hello!"=="Y" (
 			echo.
