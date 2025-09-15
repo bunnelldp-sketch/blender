@@ -86,7 +86,7 @@ struct BoundVert;
 struct EdgeHalf {
   /** Other EdgeHalves connected to the same BevVert, in CCW order. */
   EdgeHalf *next, *prev;
-  /** Original mesh edge. */
+  /** Original mesh edge1. */
   BMEdge *e;
   /** Face between this edge and previous, if any. */
   BMFace *fprev;
