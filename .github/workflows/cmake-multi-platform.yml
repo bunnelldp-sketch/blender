@@ -50,4 +50,25 @@ jobs:
     - name: Build
       # Build your program with the given configuration. Note that --config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
       run: cmd.exe /c "make.bat"
-    
+    - name: Create GitHub Release
+            id: create_release
+            uses: actions/create-release@v1
+            env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            with:
+              tag_name: v${{ github.run_number }} # Example: v1, v2, etc.
+              release_name: Release v${{ github.run_number }}
+              body: |
+                # Release Notes
+                This is a new release of the application.
+              draft: false
+              prerelease: false
+    - name: Upload Release Asset
+            uses: actions/upload-release-asset@v1
+            env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            with:
+              upload_url: ${{ steps.create_release.outputs.upload_url }}
+              asset_path: ./path/to/your/asset.zip # Replace with the actual path to your asset
+              asset_name: YourApp-v${{ github.run_number }}.zip # Replace with desired asset name
+              asset_content_type: application/zip
